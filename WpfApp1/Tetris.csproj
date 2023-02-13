@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Tetrominoes\I.png" />
+    <None Remove="Resources\Tetrominoes\J.png" />
+    <None Remove="Resources\Tetrominoes\L.png" />
+    <None Remove="Resources\Tetrominoes\O.png" />
+    <None Remove="Resources\Tetrominoes\S.png" />
+    <None Remove="Resources\Tetrominoes\T.png" />
+    <None Remove="Resources\Tetrominoes\Z.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Tetrominoes\I.png" />
+    <Resource Include="Resources\Tetrominoes\J.png" />
+    <Resource Include="Resources\Tetrominoes\L.png" />
+    <Resource Include="Resources\Tetrominoes\O.png" />
+    <Resource Include="Resources\Tetrominoes\S.png" />
+    <Resource Include="Resources\Tetrominoes\T.png" />
+    <Resource Include="Resources\Tetrominoes\Z.png" />
+  </ItemGroup>
+
+</Project>
