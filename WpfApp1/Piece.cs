@@ -30,32 +30,9 @@ internal class Piece : Image
     /// </summary>
     public int Rotation { get; private set; }
     /// <summary>
-    /// Gets the height of the basic piece in blocks
+    /// Gets the size of the piece in blocks
     /// </summary>
     public int BlockSize => Layout.GetLength(0);
-    /// <summary>
-    /// Gets the width of the rotated piece in blocks
-    /// </summary>
-    public int[] Lowest
-    {
-        get
-        {
-            var output = new int[BlockSize];
-
-            for (int width = 0; width < BlockSize; width++)
-            {
-                for (int height = BlockSize - 1; height >= 0; height--)
-                {
-                    if (ActualLayout[height, width])
-                    {
-                        output[width] = BlockSize - height - 1;
-                        break;
-                    }
-                }
-            }
-            return output;
-        }
-    }
     /// <summary>
     /// Gets the layout of the block in it's rotation
     /// </summary>
@@ -116,10 +93,7 @@ internal class Piece : Image
             return output;
         }
     }
-    /// <summary>
-    /// The size of one block, in pixels
-    /// </summary>
-    private readonly int _minoSize = 26;
+
     /// <summary>
     /// The X of the centre of rotation for the piece, in pixels
     /// </summary>
@@ -164,7 +138,10 @@ internal class Piece : Image
     public int ActualBlockWidth => Rotation % 2 == 0 ? width : height;
     #endregion
     #region Private attributes
-
+    /// <summary>
+    /// The size of one block, in pixels
+    /// </summary>
+    private readonly int _minoSize = 26;
     private readonly int width;
     private readonly int height;
     #endregion
