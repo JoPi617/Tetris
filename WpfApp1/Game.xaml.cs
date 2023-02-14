@@ -42,8 +42,8 @@ public partial class Game : Window
 
         InitialiseBoard(_width, _height);
         PieceBag();
-       // NextPiece();
-        PlacePiece("t");
+        NextPiece();
+       
 
         _gravityTimer = new DispatcherTimer
         {
