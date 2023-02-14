@@ -198,10 +198,8 @@ public partial class Game : Window
 
     private void HardDrop()
     {
-        var row = _fallingPiece.Row;
-        while (_fallingPiece.Row<row)
-        {
+        var temp = _currentPiece.GetHashCode();
+        while (temp==_currentPiece.GetHashCode())
             SoftDrop();
-        }
     }
 }
