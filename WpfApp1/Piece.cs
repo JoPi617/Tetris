@@ -117,16 +117,8 @@ internal class Piece : Image
     public int Row
     {
         get => Grid.GetRow(this);
-        set
-        {
-            Grid.SetRow(this, value);
-            Stopped = 0;
-        }
+        set  =>Grid.SetRow(this, value);
     }
-    /// <summary>
-    /// The number of times the piece has stopped
-    /// </summary>
-    public int Stopped { get; set; }
     /// <summary>
     /// The number of cells high the rotated piece occupies
     /// </summary>
