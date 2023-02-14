@@ -133,6 +133,7 @@ internal class Piece : Image
     {
         get
         {
+            /*
             try
             {
                 return Convert.ToInt32(ActualWidth / _width);
@@ -141,6 +142,8 @@ internal class Piece : Image
             {
                 return 0;
             }
+            */
+            return 26;
         }
     }
     #endregion
