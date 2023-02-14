@@ -136,6 +136,8 @@ internal class Piece : Image
     /// The number of cells wide the piece occupies
     /// </summary>
     public int ActualBlockWidth => Rotation % 2 == 0 ? width : height;
+
+    public int MinoSize => Convert.ToInt32(ActualWidth / width);
     #endregion
     #region Private fields
 
@@ -213,19 +215,19 @@ internal class Piece : Image
 
         if (pieceName is "s" or "z" or "j" or "l" or "t")
         {
-            CentreX = CentreY = _minoSize * 1.5;
+            CentreX = CentreY = MinoSize * 1.5;
             width = 3;
             height = 2;
         }
         else if (pieceName == "o")
         {
-            CentreX = _minoSize * 2;
-            CentreY = _minoSize;
+            CentreX = MinoSize * 2;
+            CentreY = MinoSize;
             width = height = 2;
         }
         else
         {
-            CentreY = CentreX = 2 * _minoSize;
+            CentreY = CentreX = 2 * MinoSize;
             width = 4;
             height = 1;
         }
