@@ -142,11 +142,18 @@ public partial class Game : Window
 
     private void SoftDrop()
     {
-        _fallingPiece.Row++;
-        if (Piece.Collision(_board, _fallingPiece))
+        try
         {
-            _fallingPiece.Row--;
-            SetPiece();
+            _fallingPiece.Row++;
+            if (Piece.Collision(_board, _fallingPiece))
+            {
+                _fallingPiece.Row--;
+                SetPiece();
+            }
+        }
+        catch (Exception e)
+        {
+     
         }
     }
 
