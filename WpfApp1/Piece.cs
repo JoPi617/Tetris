@@ -122,12 +122,12 @@ internal class Piece : Image
     /// <summary>
     /// The number of cells high the rotated piece occupies
     /// </summary>
-    public int ActualBlockHeight => Rotation % 2 == 0 ? height : width;
+    public int ActualBlockHeight => Rotation % 2 == 0 ? _height : _width;
 
     /// <summary>
     /// The number of cells wide the piece occupies
     /// </summary>
-    public int ActualBlockWidth => Rotation % 2 == 0 ? width : height;
+    public int ActualBlockWidth => Rotation % 2 == 0 ? _width : _height;
 
     public int MinoSize
     {
@@ -135,7 +135,7 @@ internal class Piece : Image
         {
             try
             {
-                return Convert.ToInt32(ActualWidth / width);
+                return Convert.ToInt32(ActualWidth / _width);
             }
             catch (OverflowException e)
             {
@@ -146,8 +146,8 @@ internal class Piece : Image
     #endregion
     #region Private fields
 
-    private readonly int width;
-    private readonly int height;
+    private readonly int _width;
+    private readonly int _height;
     #endregion
     #region Constructors
     public Piece(string pieceName)
@@ -221,20 +221,20 @@ internal class Piece : Image
         if (pieceName is "s" or "z" or "j" or "l" or "t")
         {
             CentreX = CentreY = MinoSize * 1.5;
-            width = 3;
-            height = 2;
+            _width = 3;
+            _height = 2;
         }
         else if (pieceName == "o")
         {
             CentreX = MinoSize * 2;
             CentreY = MinoSize;
-            width = height = 2;
+            _width = _height = 2;
         }
         else
         {
             CentreY = CentreX = 2 * MinoSize;
-            width = 4;
-            height = 1;
+            _width = 4;
+            _height = 1;
         }
 
         Source = new BitmapImage(new Uri(@"C:\Users\jhp33\source\repos\School\Tetris\WpfApp1\WpfApp1\Resources\Tetrominoes\" + PieceName + ".png"));
