@@ -41,7 +41,7 @@ public partial class Game : Window
         
 
         InitialiseBoard(_width, _height);
-        PieceBag();
+        ShuffleBag();
         NextPiece();
        
 
@@ -98,7 +98,9 @@ public partial class Game : Window
         GameGrid.Children.Add(piece);
         _fallingPiece = piece;
     }
-
+    /// <summary>
+    /// Allows for keyboard interaction
+    /// </summary>
     private void Window_KeyDown(object sender, KeyEventArgs e)
     {
         switch (e.Key)
@@ -111,7 +113,9 @@ public partial class Game : Window
             case Key.W: HardDrop(); break;
         }
     }
-
+    /// <summary>
+    /// Attempt to move piece 1 column right
+    /// </summary>
     private void ShiftRight()
     {
 
@@ -119,7 +123,9 @@ public partial class Game : Window
         if (Piece.Collision(_board, _fallingPiece))
             _fallingPiece.Column--;
     }
-
+    /// <summary>
+    /// Attempt to move piece 1 column left
+    /// </summary>
     private void ShiftLeft()
     {
         if (_fallingPiece.Column == 0) return;
@@ -128,18 +134,24 @@ public partial class Game : Window
             _fallingPiece.Column++;
 
     }
-
+    /// <summary>
+    /// Attempt to rotate the piece left
+    /// </summary>
     private void RotateLeft()
     {
         _fallingPiece.RotateLeft();
         
     }
-
+    /// <summary>
+    /// Attempt to rotate the piece right
+    /// </summary>
     private void RotateRight()
     {
         _fallingPiece.RotateRight();
     }
-
+    /// <summary>
+    /// Attempt to drop the piece 1 row, and lock if necessary
+    /// </summary>
     private void SoftDrop()
     {
         _fallingPiece.Row++;
@@ -149,7 +161,9 @@ public partial class Game : Window
             SetPiece();
         }
     }
-
+    /// <summary>
+    /// Update the board to show placed piece, and get next piece
+    /// </summary>
     private void SetPiece()
     {
         for (int row = 0; row < _fallingPiece.BlockSize; row++)
@@ -164,8 +178,10 @@ public partial class Game : Window
 
         NextPiece();
     }
-
-    private void PieceBag()
+    /// <summary>
+    /// Changes the order of pieces to be placed
+    /// </summary>
+    private void ShuffleBag()
     {
         _currentPiece = 0;
         var bag = _pieces.FindAll(x => true);
@@ -180,15 +196,19 @@ public partial class Game : Window
 
         _pieces = output;
     }
-
+    /// <summary>
+    /// Gets the next piece from the bag and places it
+    /// </summary>
     private void NextPiece()
     {
-        if (_currentPiece==7) PieceBag();
+        if (_currentPiece==7) ShuffleBag();
         var piece = _pieces[_currentPiece];
         _currentPiece++;
         PlacePiece(piece);
     }
-
+    /// <summary>
+    /// Repeatedly soft drop until piece is set
+    /// </summary>
     private void HardDrop()
     {
         var temp = _currentPiece.GetHashCode();
