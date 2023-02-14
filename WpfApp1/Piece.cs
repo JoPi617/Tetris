@@ -137,11 +137,8 @@ internal class Piece : Image
     /// </summary>
     public int ActualBlockWidth => Rotation % 2 == 0 ? width : height;
     #endregion
-    #region Private attributes
-    /// <summary>
-    /// The size of one block, in pixels
-    /// </summary>
-    private readonly int _minoSize = 26;
+    #region Private fields
+
     private readonly int width;
     private readonly int height;
     #endregion
