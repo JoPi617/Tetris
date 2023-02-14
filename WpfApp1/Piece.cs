@@ -129,7 +129,20 @@ internal class Piece : Image
     /// </summary>
     public int ActualBlockWidth => Rotation % 2 == 0 ? width : height;
 
-    public int MinoSize => Convert.ToInt32(ActualWidth / width);
+    public int MinoSize
+    {
+        get
+        {
+            try
+            {
+                return Convert.ToInt32(ActualWidth / width);
+            }
+            catch (OverflowException e)
+            {
+                return 0;
+            }
+        }
+    }
     #endregion
     #region Private fields
 
