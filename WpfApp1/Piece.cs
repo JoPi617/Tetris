@@ -229,13 +229,13 @@ internal class Piece : Image
         }
         else if (pieceName == "o")
         {
-            CentreX = MinoSize * 2;
-            CentreY = MinoSize;
+            CentreX = CentreY = MinoSize;
             _width = _height = 2;
         }
-        else
+        else if (pieceName=="i")
         {
-            CentreY = CentreX = 2 * MinoSize;
+            CentreX = 2 * MinoSize;
+            CentreY = MinoSize;
             _width = 4;
             _height = 1;
         }
@@ -254,8 +254,9 @@ internal class Piece : Image
         transform.Children.Add(new RotateTransform(90,CentreX,CentreY));
         transform.Children.Add(RenderTransform);
         RenderTransform = transform;
-        Grid.SetRowSpan(this,ActualBlockWidth);
-        Grid.SetColumnSpan(this,ActualBlockHeight);
+        Grid.SetRowSpan(this,ActualBlockHeight);
+        Grid.SetColumnSpan(this,ActualBlockWidth);
+        Console.WriteLine("");
     }
 
     public void RotateLeft()
@@ -267,8 +268,8 @@ internal class Piece : Image
         transform.Children.Add(new RotateTransform(-90,CentreX,CentreY));
         transform.Children.Add(RenderTransform);
         RenderTransform = transform;
-        Grid.SetRowSpan(this,ActualBlockWidth);
-        Grid.SetColumnSpan(this,ActualBlockHeight);
+        Grid.SetRowSpan(this,ActualBlockHeight);
+        Grid.SetColumnSpan(this,ActualBlockWidth);
     }
 
     #endregion
