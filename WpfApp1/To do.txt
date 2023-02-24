@@ -1,0 +1,5 @@
+﻿Fix rotation spans
+Fix placement opitcally
+Fix placement logically
+Row clears
+Speed changes
