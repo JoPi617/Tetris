@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Printing;
 using System.Text;
@@ -117,7 +118,10 @@ internal class Piece : Image
     public int Row
     {
         get => Grid.GetRow(this);
-        set  =>Grid.SetRow(this, value);
+        set
+        {
+            Grid.SetRow(this, value);
+        }
     }
     /// <summary>
     /// The number of cells high the rotated piece occupies
@@ -270,6 +274,8 @@ internal class Piece : Image
         RenderTransform = transform;
         Grid.SetRowSpan(this,ActualBlockHeight);
         Grid.SetColumnSpan(this,ActualBlockWidth);
+
+        Debug.WriteLine($"{Grid.GetRowSpan(this)}  {Grid.GetColumnSpan(this)}");
     }
 
     #endregion
@@ -289,5 +295,23 @@ internal class Piece : Image
         }
         return false;
     }
+    #endregion
+
+    #region Debug
+    public static void PrintArray(bool[,] list)
+    {
+        Debug.WriteLine("\r\n\r\n");
+        for (int i = 0; i < list.GetLength(0); i++)
+        {
+            for (int j = 0; j < list.GetLength(1); j++)
+            {
+                var x = list[i, j] ? "1" : "0";
+                Debug.Write($"{x} ");
+            }
+            Debug.Write("\r\n");
+        }
+    }
+    
+
     #endregion
 }

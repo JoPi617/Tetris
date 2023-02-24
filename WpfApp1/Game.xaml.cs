@@ -176,6 +176,9 @@ public partial class Game : Window
             }
         }
 
+        Piece.PrintArray(_board);
+        Piece.PrintArray(_fallingPiece.ActualLayout);
+
         NextPiece();
     }
     /// <summary>
@@ -207,7 +210,7 @@ public partial class Game : Window
         PlacePiece(piece);
     }
     /// <summary>
-    /// Repeatedly soft drop until piece is set
+    /// Repeatedly soft drop until piece is changed (i.e. set)
     /// </summary>
     private void HardDrop()
     {
