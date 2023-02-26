@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Printing;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Accessibility;
 
 namespace Tetris;
@@ -29,7 +31,7 @@ internal class Piece : Image
     /// <summary>
     /// Gets/ sets a int representing rotation 90 degrees clockwise
     /// </summary>
-    public int Rotation { get; private set; }
+    public int Rotation { get;  set; }
     /// <summary>
     /// Gets the size of the piece in blocks
     /// </summary>
@@ -251,31 +253,36 @@ internal class Piece : Image
     #region Public methods
     public void RotateRight()
     {
-        Rotation++;
-        if (Rotation == 4) Rotation = 0;
+        Dispatcher.Invoke(() =>
+        {
+            Rotation++;
+            if (Rotation == 4) Rotation = 0;
 
-        var transform = new TransformGroup();
-        transform.Children.Add(new RotateTransform(90,CentreX,CentreY));
-        transform.Children.Add(RenderTransform);
-        RenderTransform = transform;
-        Grid.SetRowSpan(this,ActualBlockHeight);
-        Grid.SetColumnSpan(this,ActualBlockWidth);
-        Console.WriteLine("");
+            var transform = new TransformGroup();
+            transform.Children.Add(new RotateTransform(90, CentreX, CentreY));
+            transform.Children.Add(RenderTransform);
+            RenderTransform = transform;
+            Grid.SetRowSpan(this, ActualBlockHeight);
+            Grid.SetColumnSpan(this, ActualBlockWidth);
+        });
     }
 
     public void RotateLeft()
     {
-        Rotation--;
-        if (Rotation == -1) Rotation = 3;
+        Dispatcher.Invoke(() =>
+        {
+            Rotation--;
+            if (Rotation == -1) Rotation = 3;
 
-        var transform = new TransformGroup();
-        transform.Children.Add(new RotateTransform(-90,CentreX,CentreY));
-        transform.Children.Add(RenderTransform);
-        RenderTransform = transform;
-        Grid.SetRowSpan(this,ActualBlockHeight);
-        Grid.SetColumnSpan(this,ActualBlockWidth);
+            var transform = new TransformGroup();
+            transform.Children.Add(new RotateTransform(-90, CentreX, CentreY));
+            transform.Children.Add(RenderTransform);
+            RenderTransform = transform;
+            Grid.SetRowSpan(this, ActualBlockHeight);
+            Grid.SetColumnSpan(this, ActualBlockWidth);
 
-        Debug.WriteLine($"{Grid.GetRowSpan(this)}  {Grid.GetColumnSpan(this)}");
+            Debug.WriteLine($"{Grid.GetRowSpan(this)}  {Grid.GetColumnSpan(this)}");
+        });
     }
 
     #endregion

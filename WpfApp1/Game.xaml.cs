@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -139,15 +140,25 @@ public partial class Game : Window
     /// </summary>
     private void RotateLeft()
     {
-        _fallingPiece.RotateLeft();
-        
+        //new Thread(_fallingPiece.RotateLeft).Start();
     }
     /// <summary>
     /// Attempt to rotate the piece right
     /// </summary>
     private void RotateRight()
     {
-        _fallingPiece.RotateRight();
+        _fallingPiece.Rotation++;
+        if (_fallingPiece.Rotation == 4) _fallingPiece.Rotation = 0;
+
+        var transform = new TransformGroup();
+        transform.Children.Add(new RotateTransform(90, _fallingPiece.CentreX, _fallingPiece.CentreY));
+        transform.Children.Add(_fallingPiece.RenderTransform);
+        _fallingPiece.RenderTransform = transform;
+        Grid.SetRowSpan(_fallingPiece, _fallingPiece.ActualBlockHeight);
+        Grid.SetColumnSpan(_fallingPiece, _fallingPiece.ActualBlockWidth);
+
+
+        //new Thread(_fallingPiece.RotateRight).Start();
     }
     /// <summary>
     /// Attempt to drop the piece 1 row, and lock if necessary
